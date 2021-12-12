@@ -20,42 +20,42 @@ public class Product implements Serializable {
     private Long id;
 
     @Column(length = 50)
-    private String adi;
+    private String name;
 
     @Column(precision = 19,scale = 2)
-    private BigDecimal fiyat;
+    private BigDecimal price;
 
     @Column(name="kayit_tarihi")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date kayitTarihi;
+    private Date createDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_kategori",foreignKey = @ForeignKey(name = "fk_urun_kategori_id"))
-    private Category kategori;
+    private Category category;
 
     public Long getId() {return id;}
     public void setId(Long id) {this.id = id;}
 
-    public String getAdi() {return adi;}
-    public void setAdi(String adi) { this.adi = adi;}
+    public String getName() {return name;}
+    public void setName(String adi) { this.name = adi;}
 
-    public BigDecimal getFiyat() { return fiyat;}
-    public void setFiyat(BigDecimal fiyat) { this.fiyat = fiyat;}
+    public BigDecimal getPrice() { return price;}
+    public void setPrice(BigDecimal price) { this.price = price;}
 
-    public Date getKayitTarihi() { return kayitTarihi;}
-    public void setKayitTarihi(Date kayitTarihi) { this.kayitTarihi = kayitTarihi;}
+    public Date getCreateDate() { return createDate;}
+    public void setCreateDate(Date createDate) { this.createDate = createDate;}
 
-    public Category getKategori() { return kategori;}
-    public void setKategori(Category kategori) { this.kategori = kategori;}
+    public Category getCategory() { return category;}
+    public void setCategory(Category category) { this.category = category;}
 
     @Override
     public String toString() {
         return "Urun{" +
                 "id=" + id +
-                ", adi='" + adi + '\'' +
-                ", fiyat=" + fiyat +
-                ", kayitTarihi=" + kayitTarihi +
-                ", kategori=" + kategori +
+                ", adi='" + name + '\'' +
+                ", fiyat=" + price +
+                ", kayitTarihi=" + createDate +
+                ", kategori=" + category +
                 '}';
     }
 }

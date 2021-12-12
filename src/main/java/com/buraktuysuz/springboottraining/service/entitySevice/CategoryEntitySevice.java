@@ -18,20 +18,31 @@ public class CategoryEntitySevice {
     public List<Category> findAll() {
         return (List<Category>) categoryDao.findAll();
     }
-    public Category findById(Long id){
+
+    public Category findById(Long id) {
         Optional<Category> optionalCategory = categoryDao.findById(id);
 
         Category category = null;
-        if (optionalCategory.isPresent()){
+        if (optionalCategory.isPresent()) {
             category = optionalCategory.get();
         }
 
         return category;
     }
+
     public void delete(Category category) {
         categoryDao.delete(category);
     }
-    public void save(Category category) {
-        categoryDao.save(category);
+
+    public Category save(Category category) {
+        return categoryDao.save(category);
+    }
+
+    public void deleteById(Long id) {
+        categoryDao.deleteById(id);
+    }
+
+    public long count() {
+        return categoryDao.count();
     }
 }

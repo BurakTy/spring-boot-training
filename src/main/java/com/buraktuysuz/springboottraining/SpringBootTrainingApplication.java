@@ -8,7 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -25,17 +24,17 @@ public class SpringBootTrainingApplication {
 
 	private static void CreateFitnessAndSporCat(CategoryEntitySevice categoryEntitySevice) {
 		Category spor=new Category();
-		spor.setAdi("Spor");
+		spor.setName("Spor");
 		spor.setKirilim(1L);
 
-		categoryEntitySevice.save(spor);
+		spor=categoryEntitySevice.save(spor);
 
 		Category fitness=new Category();
 		fitness.setKirilim(2L);
-		fitness.setAdi("Fitness");
+		fitness.setName("Fitness");
 		fitness.setUstKategori(spor);
 
-		categoryEntitySevice.save(fitness);
+		fitness=categoryEntitySevice.save(fitness);
 
 
 //		getAllProduct(productEntityService);

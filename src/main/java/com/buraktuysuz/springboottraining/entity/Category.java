@@ -16,34 +16,34 @@ public class Category implements Serializable {
     private Long id;
 
     @Column(name = "adi",nullable = false,length = 50)
-    private String adi;
+    private String name;
 
     @Column(name="kirilim")
-    private Long kirilim;
+    private Long depth;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name="id_ust_kategori",foreignKey = @ForeignKey(name = "fk_kategori_kategori_id"))
-    private Category ustKategori;
+    private Category upperCategory;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id;}
 
-    public String getAdi() { return adi; }
-    public void setAdi(String adi) { this.adi = adi; }
+    public String getName() { return name; }
+    public void setName(String adi) { this.name = adi; }
 
-    public Long getKirilim() { return kirilim; }
-    public void setKirilim(Long kirilim) { this.kirilim = kirilim; }
+    public Long getDepth() { return depth; }
+    public void setKirilim(Long kirilim) { this.depth = kirilim; }
 
-    public Category getUstKategori() { return ustKategori; }
-    public void setUstKategori(Category ustKategori) {  this.ustKategori = ustKategori; }
+    public Category getUpperCategory() { return upperCategory; }
+    public void setUstKategori(Category upperCategory) {  this.upperCategory = upperCategory; }
 
     @Override
     public String toString() {
         return "Kategori{" +
                 "id=" + id +
-                ", adi='" + adi + '\'' +
-                ", kirilim=" + kirilim +
-                ", ustKategori=" + ustKategori +
+                ", adi='" + name + '\'' +
+                ", kirilim=" + depth +
+                ", ustKategori=" + upperCategory +
                 '}';
     }
 }

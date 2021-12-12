@@ -1,17 +1,23 @@
 package com.buraktuysuz.springboottraining.controller;
 
 import com.buraktuysuz.springboottraining.dto.ProductDetailDto;
+import com.buraktuysuz.springboottraining.dto.ProductDto;
 import com.buraktuysuz.springboottraining.entity.Category;
 import com.buraktuysuz.springboottraining.entity.Product;
+import com.buraktuysuz.springboottraining.exception.ProductNotFoundException;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
 import com.buraktuysuz.springboottraining.service.entitySevice.ProductEntityService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
+@RequestMapping(path = "/api/products/")
 public class UrunController {
 
     ProductEntityService productEntityService;
@@ -27,17 +33,53 @@ public class UrunController {
         return "Merhaba Dünya";
     }
 
-    @GetMapping("/products")
+    @GetMapping("")
     public List<Product> findAllProductList() {
         return productEntityService.findAll();
     }
 
-    @GetMapping("/products/{id}")
-    public Product findProductById(@PathVariable Long id) {
-        return productEntityService.findById(id);
+    @GetMapping("{id}")
+    public EntityModel<Product> findProductById(@PathVariable Long id) {
+
+        Product product = productEntityService.findById(id);
+        if (product == null) {
+            throw new ProductNotFoundException("Product Not Found : " + id);
+        }
+        WebMvcLinkBuilder linkToProduct = WebMvcLinkBuilder.linkTo(
+                WebMvcLinkBuilder.methodOn(this.getClass())
+                        .findAllProductList()
+        );
+        EntityModel entityModel= EntityModel.of(product).add(linkToProduct.withRel("all products"));
+
+        return entityModel;
     }
 
-    @GetMapping("/products/dto/{id}")
+    @DeleteMapping("{id}")
+    public Product deleteProductById(@PathVariable Long id) {
+
+        Product product = productEntityService.findById(id);
+        if (product == null) {
+            throw new ProductNotFoundException("Product Not Found : " + id);
+        }
+        return product;
+    }
+
+    @PostMapping("")
+    public ResponseEntity<Object> saveProduct(@RequestBody ProductDto productDto) {
+
+        Product product = convertProductDtotooProduct(productDto);
+        product=productEntityService.save(product);
+
+        URI uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("{id}")
+                .buildAndExpand(product.getId())
+                .toUri();
+
+        return ResponseEntity.created(uri).build();
+    }
+
+    @GetMapping("dto/{id}")
     public ProductDetailDto findProductDtoById(@PathVariable Long id) {
 
         Product product = productEntityService.findById(id);
@@ -48,13 +90,24 @@ public class UrunController {
     }
 
     private ProductDetailDto convertProductToProductDetailDto(Product product) {
-        Category category = categoryEntitySevice.findById(product.getKategori().getId());
+        Category category = categoryEntitySevice.findById(product.getCategory().getId());
 
         ProductDetailDto productDetayDto = new ProductDetailDto();
-        productDetayDto.setUrunAdi(product.getAdi());
-        productDetayDto.setUrunFiyati(product.getFiyat());
-        productDetayDto.setKategoriAdi(category.getAdi());
+        productDetayDto.setUrunAdi(product.getName());
+        productDetayDto.setUrunFiyati(product.getPrice());
+        productDetayDto.setKategoriAdi(category.getName());
         return productDetayDto;
+    }
+    private Product convertProductDtotooProduct(ProductDto productDto) {
+        Category category = categoryEntitySevice.findById(productDto.getCategoryId());
+
+        Product prod = new Product();
+        prod.setName(productDto.getName());
+        prod.setPrice(productDto.getPrice());
+        prod.setCreateDate(productDto.getCreateDate());
+        prod.setCategory(category);
+
+        return prod;
     }
 
 }

@@ -30,4 +30,22 @@ public class ProductEntityService {
         }
         return product;
     }
+
+    public Product save(Product urun){
+        urun = productDao.save(urun);
+
+        return urun;
+    }
+
+    public void delete(Product urun){
+        productDao.delete(urun);
+    }
+
+    public void deleteById(Long id){
+        productDao.deleteById(id);
+    }
+
+    public long count(){
+        return productDao.count();
+    }
 }
