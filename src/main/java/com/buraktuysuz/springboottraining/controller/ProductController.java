@@ -1,8 +1,8 @@
 package com.buraktuysuz.springboottraining.controller;
 
+import com.buraktuysuz.springboottraining.converter.ProductConverter;
 import com.buraktuysuz.springboottraining.dto.ProductDetailDto;
 import com.buraktuysuz.springboottraining.dto.ProductDto;
-import com.buraktuysuz.springboottraining.entity.Category;
 import com.buraktuysuz.springboottraining.entity.Product;
 import com.buraktuysuz.springboottraining.exception.ProductNotFoundException;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
@@ -17,28 +17,28 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/api/products/")
-public class UrunController {
+@RequestMapping(path = "/api/products")
+public class ProductController {
 
     ProductEntityService productEntityService;
     CategoryEntitySevice categoryEntitySevice;
 
-    public UrunController(ProductEntityService productEntityService, CategoryEntitySevice categoryEntitySevice) {
+    public ProductController(ProductEntityService productEntityService, CategoryEntitySevice categoryEntitySevice) {
         this.productEntityService = productEntityService;
         this.categoryEntitySevice = categoryEntitySevice;
     }
 
-    @GetMapping("merhaba")
+    @GetMapping("/merhaba")
     public String merhaba() {
         return "Merhaba Dünya";
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public List<Product> findAllProductList() {
         return productEntityService.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public EntityModel<Product> findProductById(@PathVariable Long id) {
 
         Product product = productEntityService.findById(id);
@@ -49,12 +49,11 @@ public class UrunController {
                 WebMvcLinkBuilder.methodOn(this.getClass())
                         .findAllProductList()
         );
-        EntityModel entityModel= EntityModel.of(product).add(linkToProduct.withRel("all products"));
 
-        return entityModel;
+        return EntityModel.of(product).add(linkToProduct.withRel("all products"));
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public Product deleteProductById(@PathVariable Long id) {
 
         Product product = productEntityService.findById(id);
@@ -64,10 +63,11 @@ public class UrunController {
         return product;
     }
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Object> saveProduct(@RequestBody ProductDto productDto) {
 
-        Product product = convertProductDtotooProduct(productDto);
+//        Product product = convertProductDtotooProduct(productDto);
+        Product product = ProductConverter.INSTANCE.convertProductDtoToProduct(productDto); // instead of manually typed converter
         product=productEntityService.save(product);
 
         URI uri = ServletUriComponentsBuilder
@@ -79,16 +79,15 @@ public class UrunController {
         return ResponseEntity.created(uri).build();
     }
 
-    @GetMapping("dto/{id}")
+    @GetMapping("/dto/{id}")
     public ProductDetailDto findProductDtoById(@PathVariable Long id) {
 
         Product product = productEntityService.findById(id);
-
-        ProductDetailDto productDetailDto = convertProductToProductDetailDto(product);
-
-        return productDetailDto;
+//        ProductDetailDto productDetailDto = convertProductToProductDetailDto(product);
+        return ProductConverter.INSTANCE.convertProductToProductDetailDto(product);
     }
 
+    /*
     private ProductDetailDto convertProductToProductDetailDto(Product product) {
         Category category = categoryEntitySevice.findById(product.getCategory().getId());
 
@@ -108,6 +107,6 @@ public class UrunController {
         prod.setCategory(category);
 
         return prod;
-    }
+    }*/
 
 }

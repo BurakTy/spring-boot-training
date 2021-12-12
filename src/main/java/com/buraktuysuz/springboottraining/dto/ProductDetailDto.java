@@ -3,49 +3,44 @@ package com.buraktuysuz.springboottraining.dto;
 import java.math.BigDecimal;
 
 public class ProductDetailDto {
-    private String urunAdi;
-    private String kategoriAdi;
-    private BigDecimal urunFiyati;
+    private String productName;
+    private String categoryName;
+    private BigDecimal productPrice;
 
     public ProductDetailDto() {
     }
 
     public ProductDetailDto(String urunAdi, String kategoriAdi, BigDecimal urunFiyati) {
-        this.urunAdi = urunAdi;
-        this.kategoriAdi = kategoriAdi;
-        this.urunFiyati = urunFiyati;
+        this.productName = urunAdi;
+        this.categoryName = kategoriAdi;
+        this.productPrice = urunFiyati;
     }
 
     public String getUrunAdi() {
-        return urunAdi;
+        return productName;
     }
-
-    public void setUrunAdi(String urunAdi) {
-        this.urunAdi = urunAdi;
-    }
+    public void setUrunAdi(String urunAdi) { this.productName = urunAdi; }
 
     public String getKategoriAdi() {
-        return kategoriAdi;
+        return categoryName;
     }
-
     public void setKategoriAdi(String kategoriAdi) {
-        this.kategoriAdi = kategoriAdi;
+        this.categoryName = kategoriAdi;
     }
 
     public BigDecimal getUrunFiyati() {
-        return urunFiyati;
+        return productPrice;
     }
-
     public void setUrunFiyati(BigDecimal urunFiyati) {
-        this.urunFiyati = urunFiyati;
+        this.productPrice = urunFiyati;
     }
 
     @Override
     public String toString() {
         return "UrunDetayDto{" +
-                "urunAdi='" + urunAdi + '\'' +
-                ", kategoriAdi='" + kategoriAdi + '\'' +
-                ", urunFiyati=" + urunFiyati +
+                "urunAdi='" + productName + '\'' +
+                ", kategoriAdi='" + categoryName + '\'' +
+                ", urunFiyati=" + productPrice +
                 '}';
     }
 }
