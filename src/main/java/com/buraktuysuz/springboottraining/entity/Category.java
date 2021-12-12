@@ -32,10 +32,10 @@ public class Category implements Serializable {
     public void setName(String adi) { this.name = adi; }
 
     public Long getDepth() { return depth; }
-    public void setKirilim(Long kirilim) { this.depth = kirilim; }
+    public void setDepth(Long kirilim) { this.depth = kirilim; }
 
     public Category getUpperCategory() { return upperCategory; }
-    public void setUstKategori(Category upperCategory) {  this.upperCategory = upperCategory; }
+    public void setUpperCategory(Category upperCategory) {  this.upperCategory = upperCategory; }
 
     @Override
     public String toString() {

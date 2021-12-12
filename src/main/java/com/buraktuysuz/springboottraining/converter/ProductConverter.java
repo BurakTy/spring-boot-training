@@ -16,6 +16,9 @@ public interface ProductConverter {
     @Mapping(source = "categoryId", target = "category.id")
     Product convertProductDtoToProduct(ProductDto productDto);
 
+    @Mapping(source = "category.id", target = "categoryId")
+    ProductDto convertProductToProductDto(Product product);
+
     @Mapping(source = "price", target = "productPrice")
     @Mapping(source = "name", target = "productName")
     @Mapping(source = "category.name", target = "categoryName")

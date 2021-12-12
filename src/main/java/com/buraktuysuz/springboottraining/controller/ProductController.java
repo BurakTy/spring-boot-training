@@ -7,9 +7,12 @@ import com.buraktuysuz.springboottraining.entity.Product;
 import com.buraktuysuz.springboottraining.exception.ProductNotFoundException;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
 import com.buraktuysuz.springboottraining.service.entitySevice.ProductEntityService;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -36,6 +39,25 @@ public class ProductController {
     @GetMapping("/")
     public List<Product> findAllProductList() {
         return productEntityService.findAll();
+    }
+
+    @GetMapping("/detail/{id}")
+    public MappingJacksonValue findProductDtoById(@PathVariable Long id) {
+
+        Product product = productEntityService.findById(id);
+        if (product == null) {
+            throw new ProductNotFoundException("Product Not Found : " + id);
+        }
+
+        SimpleBeanPropertyFilter filter = SimpleBeanPropertyFilter.filterOutAllExcept("id");
+
+        SimpleFilterProvider filters = new SimpleFilterProvider().addFilter("UrunFilter", filter);
+
+        MappingJacksonValue mapping = new MappingJacksonValue(product);
+
+        mapping.setFilters(filters);
+
+        return mapping;
     }
 
     @GetMapping("/{id}")
@@ -80,14 +102,14 @@ public class ProductController {
     }
 
     @GetMapping("/dto/{id}")
-    public ProductDetailDto findProductDtoById(@PathVariable Long id) {
+    public ProductDetailDto findProductDetailDtoById(@PathVariable Long id) {
 
         Product product = productEntityService.findById(id);
 //        ProductDetailDto productDetailDto = convertProductToProductDetailDto(product);
         return ProductConverter.INSTANCE.convertProductToProductDetailDto(product);
     }
 
-    /*
+    /*  old product converter methods
     private ProductDetailDto convertProductToProductDetailDto(Product product) {
         Category category = categoryEntitySevice.findById(product.getCategory().getId());
 

@@ -25,14 +25,14 @@ public class SpringBootTrainingApplication {
 	private static void CreateFitnessAndSporCat(CategoryEntitySevice categoryEntitySevice) {
 		Category spor=new Category();
 		spor.setName("Spor");
-		spor.setKirilim(1L);
+		spor.setDepth(1L);
 
 		spor=categoryEntitySevice.save(spor);
 
 		Category fitness=new Category();
-		fitness.setKirilim(2L);
+		fitness.setDepth(2L);
 		fitness.setName("Fitness");
-		fitness.setUstKategori(spor);
+		fitness.setUpperCategory(spor);
 
 		fitness=categoryEntitySevice.save(fitness);
 

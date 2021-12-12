@@ -29,9 +29,10 @@ public class CategoryController {
     }
 
     @PostMapping("/")
-    public Category saveCategory(@RequestBody CategoryDto categoryDto){
+    public CategoryDto saveCategory(@RequestBody CategoryDto categoryDto){
         Category category=  CategoryConverter.INSTANCE.convertCategoryDtoToCategory(categoryDto);
-        return categoryEntitySevice.save(category);
+        category =categoryEntitySevice.save(category);
+        return CategoryConverter.INSTANCE.convertCategoryToCategoryDto(category);
     }
 
     @PutMapping("/")

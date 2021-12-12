@@ -10,29 +10,29 @@ public class ProductDetailDto {
     public ProductDetailDto() {
     }
 
-    public ProductDetailDto(String urunAdi, String kategoriAdi, BigDecimal urunFiyati) {
-        this.productName = urunAdi;
-        this.categoryName = kategoriAdi;
-        this.productPrice = urunFiyati;
+    public ProductDetailDto(String productName, String categoryName, BigDecimal productPrice) {
+        this.productName = productName;
+        this.categoryName = categoryName;
+        this.productPrice = productPrice;
     }
 
-    public String getUrunAdi() {
+    public String getProductName() {
         return productName;
     }
-    public void setUrunAdi(String urunAdi) { this.productName = urunAdi; }
+    public void setProductName(String productName) { this.productName = productName; }
 
-    public String getKategoriAdi() {
+    public String getCategoryName() {
         return categoryName;
     }
-    public void setKategoriAdi(String kategoriAdi) {
-        this.categoryName = kategoriAdi;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
-    public BigDecimal getUrunFiyati() {
+    public BigDecimal getProductPrice() {
         return productPrice;
     }
-    public void setUrunFiyati(BigDecimal urunFiyati) {
-        this.productPrice = urunFiyati;
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
     }
 
     @Override
