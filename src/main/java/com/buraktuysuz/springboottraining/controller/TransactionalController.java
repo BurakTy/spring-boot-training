@@ -134,14 +134,34 @@ public class TransactionalController {
     }
 
     /**
-     *
+     *  12: supports transaction var
+     */
+    @PostMapping("/ts11")
+    public void ts12() {
+        ts11Service.save();
+    }
+    /**
+     *  13: supports transaction yok
+     */
+    @PostMapping("/ts11")
+    public void ts13() {
+        ts11Service.save();
+    }
+    /**
+     *  4: not_suppoted (hızlı)
+     */
+    @PostMapping("/ts11")
+    public void ts14() {
+        ts11Service.save();
+    }
 
-     * 10: mandatory transaction yok
-     * 11: mandatory transaction var
-     * 12: supports transaction var
-     * 13: supports transaction yok
-     * 14: not_suppoted (hızlı)
-     * 15: nested (desteklenmez)
+
+    /**
+     * NOT   transaction kontrol-aç-kapa-commit gibi işlemleri yaptıkları için gerekmedikçe kullanmamak gerekli yoksa çok maliyetli oluyor
+     *
+     * 16-17-18  maliyeler için birer örnek githum sbahadirm/n11-bootcamp-spring-boot-training  adresinden örneklere bakılabilir
+     *
+     * 15: nested (desteklenmez) //  örneğini yapmadım
      * 16: toplu işlemlerinizi transactional olmayan yerde yapın.en hızlı senaryo
      * 17: transaction açmasa bile transactional olan bir metotta işlem yapma kapatma maliyeti
      * 18: transaction açıp kapatma maliyeti
