@@ -1,6 +1,7 @@
 package com.buraktuysuz.springboottraining.controller;
 
 import com.buraktuysuz.springboottraining.dto.CategoryDto;
+import com.buraktuysuz.springboottraining.transactionnal.t10.Ts10Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts1.Ts1Service;
 import com.buraktuysuz.springboottraining.transactionnal.ts2.Ts2Service;
 import com.buraktuysuz.springboottraining.transactionnal.ts3.Ts3Service1;
@@ -10,6 +11,7 @@ import com.buraktuysuz.springboottraining.transactionnal.ts6.Ts6Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts7.Ts7Service;
 import com.buraktuysuz.springboottraining.transactionnal.ts8.Ts8Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts9.Ts9Service1;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,41 +21,35 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/transactional")
 public class TransactionalController {
 
-
+    @Autowired
     private Ts1Service ts1Service;
+    @Autowired
     private Ts2Service ts2Service;
+    @Autowired
     private Ts3Service1 ts3Service;
+    @Autowired
     private Ts4Service1 ts4Service;
+    @Autowired
     private Ts5Service1 ts5Service;
+    @Autowired
     private Ts6Service1 ts6Service;
+    @Autowired
     private Ts7Service ts7Service;
+    @Autowired
     private Ts8Service1 ts8Service;
+    @Autowired
     private Ts9Service1 ts9Service;
-//    private Ts10Service1 ts10Service;
+    @Autowired
+    private Ts10Service1 ts10Service;
 //    private Ts11Service1 ts11Service;
 
-
-    public TransactionalController(Ts1Service ts1Service, Ts2Service ts2Service, Ts3Service1 ts3Service, Ts4Service1 ts4Service,
-                                   Ts5Service1 ts5Service, Ts6Service1 ts6Service, Ts7Service ts7Service, Ts8Service1 ts8Service,
-                                   Ts9Service1 ts9Service
-    ) {
-        this.ts1Service = ts1Service;
-        this.ts2Service = ts2Service;
-        this.ts3Service = ts3Service;
-        this.ts4Service = ts4Service;
-        this.ts5Service = ts5Service;
-        this.ts6Service = ts6Service;
-        this.ts7Service = ts7Service;
-        this.ts8Service = ts8Service;
-        this.ts9Service = ts9Service;
-    }
 
     /**
      * 1: transactional olmayan yerde kayıt işlemi
      **/
 
     @PostMapping("/ts1")
-    public void transactionnal(@RequestBody CategoryDto categoryDto) {
+    public void transactionnal() {
         ts1Service.save();
     }
 
@@ -62,7 +58,7 @@ public class TransactionalController {
      **/
 
     @PostMapping("/ts2")
-    public void transactionnal2(@RequestBody CategoryDto categoryDto) {
+    public void transactionnal2() {
         ts2Service.save();
     }
 
@@ -93,7 +89,7 @@ public class TransactionalController {
     /**
      * 6: sadece transactional olan bir yerde kayıt işlemi sırasında hata
      */
-    @PostMapping("/ts5")
+    @PostMapping("/ts6")
     public void ts6() {
         ts6Service.save();
     }
@@ -101,7 +97,7 @@ public class TransactionalController {
     /**
      * 7: aynı class içinde requires new kullanımı.
      */
-    @PostMapping("/ts5")
+    @PostMapping("/ts7")
     public void ts7() {
         ts7Service.save();
     }
@@ -109,7 +105,7 @@ public class TransactionalController {
     /**
      * 8: requires new i farklı classa taşıma.
      */
-    @PostMapping("/ts5")
+    @PostMapping("/ts8")
     public void ts8() {
         ts8Service.save();
     }
@@ -117,9 +113,17 @@ public class TransactionalController {
     /**
      * 9: requires new ile hata almayanları commitleme.
      */
-    @PostMapping("/ts5")
+    @PostMapping("/ts9")
     public void ts9() {
         ts9Service.save();
+    }
+
+    /**
+     *  10: mandatory transaction yok
+     */
+    @PostMapping("/ts10")
+    public void ts10() {
+        ts10Service.save();
     }
 
 
