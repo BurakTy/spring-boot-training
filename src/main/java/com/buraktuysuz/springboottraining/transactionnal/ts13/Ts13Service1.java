@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 @Service
-@Transactional
 public class Ts13Service1 {
     private CategoryEntitySevice categoryEntitySevice;
     private Ts13Service2 ts13Service2;
