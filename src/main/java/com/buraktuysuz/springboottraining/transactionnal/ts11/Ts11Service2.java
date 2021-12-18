@@ -1,4 +1,4 @@
-package com.buraktuysuz.springboottraining.transactionnal.t11;
+package com.buraktuysuz.springboottraining.transactionnal.ts11;
 
 import com.buraktuysuz.springboottraining.entity.Category;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;

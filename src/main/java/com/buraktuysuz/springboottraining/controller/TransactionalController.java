@@ -1,8 +1,8 @@
 package com.buraktuysuz.springboottraining.controller;
 
-import com.buraktuysuz.springboottraining.dto.CategoryDto;
-import com.buraktuysuz.springboottraining.transactionnal.t10.Ts10Service1;
+import com.buraktuysuz.springboottraining.transactionnal.ts10.Ts10Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts1.Ts1Service;
+import com.buraktuysuz.springboottraining.transactionnal.ts11.Ts11Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts2.Ts2Service;
 import com.buraktuysuz.springboottraining.transactionnal.ts3.Ts3Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts4.Ts4Service1;
@@ -13,7 +13,6 @@ import com.buraktuysuz.springboottraining.transactionnal.ts8.Ts8Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts9.Ts9Service1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +40,8 @@ public class TransactionalController {
     private Ts9Service1 ts9Service;
     @Autowired
     private Ts10Service1 ts10Service;
-//    private Ts11Service1 ts11Service;
+    @Autowired
+    private Ts11Service1 ts11Service;
 
 
     /**
@@ -125,7 +125,13 @@ public class TransactionalController {
     public void ts10() {
         ts10Service.save();
     }
-
+    /**
+     *  11: mandatory transaction var
+     */
+    @PostMapping("/ts11")
+    public void ts11() {
+        ts11Service.save();
+    }
 
     /**
      *

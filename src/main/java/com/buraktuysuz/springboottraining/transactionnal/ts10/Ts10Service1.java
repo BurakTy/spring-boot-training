@@ -1,4 +1,4 @@
-package com.buraktuysuz.springboottraining.transactionnal.t10;
+package com.buraktuysuz.springboottraining.transactionnal.ts10;
 
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
 import org.springframework.stereotype.Service;
