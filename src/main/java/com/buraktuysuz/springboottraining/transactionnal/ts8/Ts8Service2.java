@@ -3,30 +3,28 @@ package com.buraktuysuz.springboottraining.transactionnal.ts8;
 import com.buraktuysuz.springboottraining.entity.Category;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 @Transactional
-public class Ts8Service1 {
+public class Ts8Service2 {
     private CategoryEntitySevice categoryEntitySevice;
-    private Ts8Service2 ts8Service2;
 
-    public Ts8Service1(CategoryEntitySevice categoryEntitySevice,Ts8Service2 ts8Service2) {
+    public Ts8Service2(CategoryEntitySevice categoryEntitySevice) {
         this.categoryEntitySevice = categoryEntitySevice;
-        this.ts8Service2 = ts8Service2;
     }
 
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void save(){
         Category category=new Category();
-        category.setName("transactional8-1");
+        category.setName("transactional8-2");
         category.setDepth(1L);
         categoryEntitySevice.save(category);
-        System.out.println("transactional 8-1 save");
+        System.out.println("transactional requires_new 8-2 save");
 
-        this.ts8Service2.save();
 
-        System.out.println("8-1 end");
     }
 
 }

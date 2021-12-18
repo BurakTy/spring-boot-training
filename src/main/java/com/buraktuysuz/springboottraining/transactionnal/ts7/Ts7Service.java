@@ -21,10 +21,10 @@ public class Ts7Service {
         category.setName("transactional7-1");
         category.setDepth(1L);
         categoryEntitySevice.save(category);
-        System.out.println("non transactional 7-1 save");
+        System.out.println("transactional 7-1 save");
 
         save2();
-        System.out.println("non transactional 8-2 save");
+        System.out.println("7-1 end");
     }
 
     /**
@@ -49,7 +49,7 @@ public class Ts7Service {
         category.setName("transactional7-2");
         category.setDepth(1L);
         categoryEntitySevice.save(category);
-        System.out.println("non transactional 7-2 save");
+        System.out.println("transactional requires_new 7-2 save");
 
     }
 }

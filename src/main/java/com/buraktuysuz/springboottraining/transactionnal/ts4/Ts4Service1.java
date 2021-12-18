@@ -22,6 +22,6 @@ public class Ts4Service1 {
 
         ts4Service2.save();
 
-        System.out.println("non transactional 4-1 end");
+        System.out.println("4-1 end");
     }
 }

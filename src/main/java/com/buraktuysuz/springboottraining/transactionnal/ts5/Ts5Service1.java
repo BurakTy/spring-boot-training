@@ -25,6 +25,6 @@ public class Ts5Service1 {
 
         ts5Service2.save();
 
-        System.out.println("non transactional 5-1 end");
+        System.out.println("5-1 end");
     }
 }

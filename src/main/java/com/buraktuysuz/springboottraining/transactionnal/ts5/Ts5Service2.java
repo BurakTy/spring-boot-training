@@ -22,6 +22,6 @@ public class Ts5Service2 {
         category.setDepth(1L);
         categoryEntitySevice.save(category);
 
-        System.out.println("transactinal service 5-2 end");
+        System.out.println("5-2 end");
     }
 }

@@ -18,10 +18,10 @@ public class Ts6Service1 {
 
     public void save(){
         Category category=new Category();
-        category.setName("transactional5-1");
+        category.setName("transactional6-1");
         category.setDepth(1L);
         categoryEntitySevice.save(category);
-        System.out.println("non transactional 5-1 save");
+        System.out.println("6-1 save");
 
         throw  new RuntimeException("hata");
 
