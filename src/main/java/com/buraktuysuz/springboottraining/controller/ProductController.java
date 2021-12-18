@@ -16,6 +16,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -86,7 +87,7 @@ public class ProductController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> saveProduct(@RequestBody ProductDto productDto) {
+    public ResponseEntity<Object> saveProduct(@RequestBody @Valid ProductDto productDto) {
 
 //        Product product = convertProductDtotooProduct(productDto);
         Product product = ProductConverter.INSTANCE.convertProductDtoToProduct(productDto); // instead of manually typed converter

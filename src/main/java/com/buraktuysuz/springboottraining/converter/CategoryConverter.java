@@ -1,11 +1,10 @@
 package com.buraktuysuz.springboottraining.converter;
 
 import com.buraktuysuz.springboottraining.dto.CategoryDto;
+import com.buraktuysuz.springboottraining.dto.ProductDto;
 import com.buraktuysuz.springboottraining.entity.Category;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import com.buraktuysuz.springboottraining.entity.Product;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
 import java.util.List;
@@ -24,17 +23,24 @@ public interface CategoryConverter {
     @Mapping(target = "upperCategoryId", source = "upperCategory.id")
     List<CategoryDto> convertCategoryListToCategoryDtoList(List<Category> categoryList);
 
-    @Mapping(target = "upperCategory", source = "upperCategoryId", qualifiedByName = "categoryIdToCategory")
+    @Mapping(target = "upperCategory", source = "upperCategoryId")
     Category convertCategoryDtoToCategory(CategoryDto categoryDto);
 
-    @Named("categoryIdToCategory")
-    public static Category categoryIdToCategory(Long upperCategoryId) {
-        if (upperCategoryId == null) {
-            return null;
-        } else {
-            Category cat = new Category();
-            cat.setId(upperCategoryId);
-            return cat;
+    @AfterMapping()
+    default void setNulls(@MappingTarget() final Product product, ProductDto productDto){
+        if(productDto.getCategoryId()==null){
+            product.setCategory(null);
         }
     }
+
+//    @Named("categoryIdToCategory")  //kullanmak için qualifiedByName = "categoryIdToCategory"
+//    public static Category categoryIdToCategory(Long upperCategoryId) {
+//        if (upperCategoryId == null) {
+//            return null;
+//        } else {
+//            Category cat = new Category();
+//            cat.setId(upperCategoryId);
+//            return cat;
+//        }
+//    }
 }
