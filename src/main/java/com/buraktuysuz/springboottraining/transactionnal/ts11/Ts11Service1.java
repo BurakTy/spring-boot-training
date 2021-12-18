@@ -1,5 +1,6 @@
 package com.buraktuysuz.springboottraining.transactionnal.ts11;
 
+import com.buraktuysuz.springboottraining.entity.Category;
 import com.buraktuysuz.springboottraining.service.entitySevice.CategoryEntitySevice;
 import com.buraktuysuz.springboottraining.transactionnal.ts10.Ts10Service2;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,13 @@ public class Ts11Service1 {
     }
 
     public void save(){
+        Category category = new Category();
+        category.setName("transactional11-1");
+        category.setDepth(1L);
+        categoryEntitySevice.save(category);
+        System.out.println(" 11-1 save");
+
+
         ts11Service2.save();
         System.out.println(" 11-1 end");
     }
