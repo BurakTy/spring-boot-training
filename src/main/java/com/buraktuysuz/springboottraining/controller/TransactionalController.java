@@ -7,6 +7,8 @@ import com.buraktuysuz.springboottraining.transactionnal.ts3.Ts3Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts4.Ts4Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts5.Ts5Service1;
 import com.buraktuysuz.springboottraining.transactionnal.ts6.Ts6Service1;
+import com.buraktuysuz.springboottraining.transactionnal.ts7.Ts7Service;
+import com.buraktuysuz.springboottraining.transactionnal.ts8.Ts8Service1;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,18 +25,24 @@ public class TransactionalController {
     private Ts4Service1 ts4Service;
     private Ts5Service1 ts5Service;
     private Ts6Service1 ts6Service;
+    private Ts7Service ts7Service;
+    private Ts8Service1 ts8Service;
+//    private Ts9Service1 ts9Service;
+//    private Ts10Service1 ts10Service;
+//    private Ts11Service1 ts11Service;
 
 
     public TransactionalController(Ts1Service ts1Service, Ts2Service ts2Service, Ts3Service1 ts3Service, Ts4Service1 ts4Service,
-                                   Ts5Service1 ts5Service, Ts6Service1 ts6Service;)
-
-    {
+                                   Ts5Service1 ts5Service, Ts6Service1 ts6Service, Ts7Service ts7Service, Ts8Service1 ts8Service
+    ) {
         this.ts1Service = ts1Service;
         this.ts2Service = ts2Service;
         this.ts3Service = ts3Service;
         this.ts4Service = ts4Service;
         this.ts5Service = ts5Service;
         this.ts6Service = ts6Service;
+        this.ts7Service = ts7Service;
+        this.ts8Service = ts8Service;
     }
 
     /**
@@ -88,10 +96,24 @@ public class TransactionalController {
     }
 
     /**
-     *
-
      * 7: aynı class içinde requires new kullanımı.
+     */
+    @PostMapping("/ts5")
+    public void ts7() {
+        ts7Service.save();
+    }
+
+    /**
      * 8: requires new i farklı classa taşıma.
+     */
+    @PostMapping("/ts5")
+    public void ts8() {
+        ts8Service.save();
+    }
+
+
+    /**
+     *
      * 9: requires new ile hata almayanları commitleme.
      * 10: mandatory transaction yok
      * 11: mandatory transaction var
