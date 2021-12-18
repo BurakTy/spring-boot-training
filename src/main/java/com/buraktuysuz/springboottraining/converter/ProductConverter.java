@@ -11,10 +11,10 @@ public interface ProductConverter {
 
     ProductConverter INSTANCE = Mappers.getMapper(ProductConverter.class);
 
-    @Mapping(source = "categoryId", target = "category.id")
+    @Mapping(target = "category.id",source = "categoryId")
     Product convertProductDtoToProduct(ProductDto productDto);
 
-    @Mapping(source = "category.id", target = "categoryId")
+    @Mapping( target = "categoryId",source = "category.id")
     ProductDto convertProductToProductDto(Product product);
 
     @Mapping(source = "price", target = "productPrice")

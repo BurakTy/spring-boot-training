@@ -23,7 +23,7 @@ public interface CategoryConverter {
     @Mapping(target = "upperCategoryId", source = "upperCategory.id")
     List<CategoryDto> convertCategoryListToCategoryDtoList(List<Category> categoryList);
 
-    @Mapping(target = "upperCategory", source = "upperCategoryId")
+    @Mapping(target = "upperCategory.id", source = "upperCategoryId")
     Category convertCategoryDtoToCategory(CategoryDto categoryDto);
 
     @AfterMapping()
