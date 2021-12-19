@@ -136,21 +136,21 @@ public class TransactionalController {
     /**
      *  12: supports transaction var
      */
-    @PostMapping("/ts11")
+    @PostMapping("/ts12")
     public void ts12() {
         ts11Service.save();
     }
     /**
      *  13: supports transaction yok
      */
-    @PostMapping("/ts11")
+    @PostMapping("/ts13")
     public void ts13() {
         ts11Service.save();
     }
     /**
      *  4: not_suppoted (hızlı)
      */
-    @PostMapping("/ts11")
+    @PostMapping("/ts14")
     public void ts14() {
         ts11Service.save();
     }
