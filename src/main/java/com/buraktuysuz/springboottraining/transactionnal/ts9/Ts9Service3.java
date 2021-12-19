@@ -11,19 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class Ts9Service3 {
     private CategoryEntitySevice categoryEntitySevice;
-    private Ts9Service3 ts9Service3;
-    public Ts9Service3(CategoryEntitySevice categoryEntitySevice, Ts9Service3 ts9Service3) {
+    public Ts9Service3(CategoryEntitySevice categoryEntitySevice) {
         this.categoryEntitySevice = categoryEntitySevice;
-        this.ts9Service3 = ts9Service3;
+
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void saveCategory(int i) {
 
-        Category kategori = new Category();
-        kategori.setName("transactional9-" + i);
-        kategori.setDepth(1L);
-        categoryEntitySevice.save(kategori);
+        Category category = new Category();
+        category.setName("transactional9-" + i);
+        category.setDepth(1L);
+        categoryEntitySevice.save(category);
 
         if (i == 9){
             throw new RuntimeException("hata");
