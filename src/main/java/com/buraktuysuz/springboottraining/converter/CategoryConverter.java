@@ -33,14 +33,4 @@ public interface CategoryConverter {
         }
     }
 
-//    @Named("categoryIdToCategory")  //kullanmak için qualifiedByName = "categoryIdToCategory"
-//    public static Category categoryIdToCategory(Long upperCategoryId) {
-//        if (upperCategoryId == null) {
-//            return null;
-//        } else {
-//            Category cat = new Category();
-//            cat.setId(upperCategoryId);
-//            return cat;
-//        }
-//    }
 }
