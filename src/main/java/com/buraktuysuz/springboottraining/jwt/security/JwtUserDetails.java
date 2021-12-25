@@ -36,6 +36,11 @@ public class JwtUserDetails implements UserDetails {
         return new JwtUserDetails(id, username, password, authorityList);
     }
 
+    public Long getId() {
+        return id;
+    }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
