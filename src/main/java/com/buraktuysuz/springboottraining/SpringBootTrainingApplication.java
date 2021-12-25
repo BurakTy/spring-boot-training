@@ -14,8 +14,8 @@ import java.util.List;
 public class SpringBootTrainingApplication {
 
 	public static void main(String[] args) {
-//		SpringApplication.run(SpringBootTrainingApplication.class, args);
-		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootTrainingApplication.class, args);
+		SpringApplication.run(SpringBootTrainingApplication.class, args);
+//		ConfigurableApplicationContext applicationContext = SpringApplication.run(SpringBootTrainingApplication.class, args);
 //		CategoryEntitySevice categoryEntitySevice = applicationContext.getBean(CategoryEntitySevice.class);
 //		ProductEntityService productEntityService=applicationContext.getBean(ProductEntityService.class);
 //		getPhoneCategory(categoryEntitySevice);

@@ -28,10 +28,10 @@ public class AuthenticationService {
     private JwtTokenGenerator jwtTokenGenerator;
     public String login(UserRequestDto userRequestDto){
         UsernamePasswordAuthenticationToken token= new UsernamePasswordAuthenticationToken(userRequestDto.getUsername(),userRequestDto.getPassword());
-        Authentication authenticate = authenticationManager.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(authenticate);
+        Authentication authentication = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String responseToken= jwtTokenGenerator.generateJwtToken(authenticate);
+        String responseToken= jwtTokenGenerator.generateJwtToken(authentication);
 
         return EnumJwtConstant.BEARER.getConstant() + responseToken;
     }
@@ -42,7 +42,7 @@ public class AuthenticationService {
         user.setUsername(username);
         user.setPassword(password);
 
-        return user;
+        return userEntityService.save(user);
     }
 
     public void validateUserRequest(String username) {
