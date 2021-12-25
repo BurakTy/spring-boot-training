@@ -1,9 +1,10 @@
-package com.buraktuysuz.springboottraining.service.entitySevice;
+package com.buraktuysuz.springboottraining.service;
 
 import com.buraktuysuz.springboottraining.dto.UserRequestDto;
 import com.buraktuysuz.springboottraining.entity.User;
 import com.buraktuysuz.springboottraining.jwt.security.EnumJwtConstant;
 import com.buraktuysuz.springboottraining.jwt.security.JwtTokenGenerator;
+import com.buraktuysuz.springboottraining.service.entitySevice.UserEntityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

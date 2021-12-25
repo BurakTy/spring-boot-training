@@ -2,7 +2,7 @@ package com.buraktuysuz.springboottraining.controller;
 
 import com.buraktuysuz.springboottraining.dto.UserRequestDto;
 import com.buraktuysuz.springboottraining.entity.User;
-import com.buraktuysuz.springboottraining.service.entitySevice.AuthenticationService;
+import com.buraktuysuz.springboottraining.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
